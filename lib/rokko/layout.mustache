@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>{{ title }}</title>
+  <style type="text/css" media="screen, projection">
+  {{ styles }}
+  </style>
+  <script>{{{ highlight_js }}}</script>
+</head>
+<body>
+<div id="container">
+  <div id="background"></div>
+  {{#sources?}}
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+        {{#sources}}
+          <a class="source" href="{{ url }}">{{ basename }}</a>
+        {{/sources}}
+      </div>
+    </div>
+  </div>
+  {{/sources?}}
+  <table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th class="docs"><h1>{{ title }}</h1></th>
+      <th class="code"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#sections}}
+    <tr id="section-{{ num }}">
+      <td class="docs">
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-{{ num }}">&#182;</a>
+        </div>
+        {{{ docs }}}
+      </td>
+      <td class="code">
+        <pre class="ruby"><code>{{ code }}</code></pre>
+      </td>
+    </tr>
+    {{/sections}}
+  </tbody>
+  </table>
+</div>
+</body>
+</html>

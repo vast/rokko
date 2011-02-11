@@ -1,0 +1,94 @@
+#!/usr/bin/env ruby
+
+#/ Usage: rokko [-i [INDEX_FILE]][-o <dir>] <file>...
+#/ Generate literate-programming-style documentation for Ruby source <file>s.
+#/
+#/ Options:
+#/   -i, --index=<file>     Also generate an index with links to HTML files or use <file> as
+#/                          index
+#/   -o, --output=<dir>     Directory where generated HTML files are written
+#/       --help             Show this help message
+
+require 'optparse'
+require 'fileutils'
+begin
+  $:.unshift(File.expand_path('../../lib', __FILE__).sub(/^#{Dir.pwd}\//, ''))
+  require 'rokko'
+rescue LoadError
+  if !defined?(Gem)
+    require 'rubygems'
+    retry
+  end
+  raise
+end
+
+# Write usage message to stdout and exit
+def usage(stream=$stderr, status=1)
+  stream.puts File.readlines(__FILE__).
+    grep(/^#\//).
+    map { |line| line.sub(/^#. ?/, '') }.
+    join
+  exit status
+end
+
+# Like `Kernel#abort` but writes a note encouraging the user to consult.
+# `rokko --help` for more information
+def abort_with_note(message=nil)
+  $stderr.puts message if message
+  abort "See `rokko --help' for usage information."
+end
+
+# Parse command line options, aborting if anything goes wrong.
+output_dir = '.'
+sources = []
+options = {}
+ARGV.options { |o|
+  o.program_name = File.basename($0)
+  o.on("-o", "--output=DIR") { |dir| output_dir = dir }
+  o.on("-i", "--index [FILE]") { |index| index ? options[:index] = index : options[:generate_index] = true}
+  o.on_tail("-h", "--help") { usage($stdout, 0) }
+  o.parse!
+} or abort_with_note
+
+# Eat sources from ARGV.
+sources << ARGV.shift while ARGV.any?
+
+# Make sure we have some files to work with.
+if sources.empty?
+  abort_with_note "#{File.basename($0)}: no input <file>s given"
+end
+
+# Find README file for `index.html` and delete it from `sources`
+if options[:generate_index]
+  readme_source = sources.detect {|f| File.basename(f) =~ /README(\.(md|text|markdown|mdown|mkd|mkdn)$)?/i}
+  readme = readme_source ? File.read(sources.delete(readme_source)) : ''
+end
+
+# Run each file through Rokko and write output.
+sources.each do |filename|
+  rokko = Rokko::Rokko.new(filename, sources, options)
+  dest = File.join(output_dir, filename.sub(Regexp.new("#{File.extname(filename)}$"), ".html"))
+  puts "rokko: #{filename} -> #{dest}"
+  FileUtils.mkdir_p File.dirname(dest)
+  File.open(dest, 'wb') { |fd| fd.write(rokko.to_html) }
+end
+
+# Generate index.html if needed.
+if options[:generate_index]
+  require 'rokko/index_layout'
+  dest = File.join(output_dir, 'index.html')
+  puts "rokko: #{dest}"
+  File.open(dest, 'wb') { |fd| fd.write(Rokko::IndexLayout.new(sources, readme).render)}
+end
+
+# Generate and use specified file as index.
+if options[:index]
+
+  source_index = sources.delete(options[:index])
+  if source_index
+    rokko = Rokko::Rokko.new(source_index, sources, options.merge(:preserve_urls => true))
+    dest = File.join(output_dir, 'index.html')
+    puts "rokko: #{source_index} -> index.html"
+    File.open(dest, 'wb') { |fd| fd.write(rokko.to_html) }
+  end
+end

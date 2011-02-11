@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>{{ title }}</title>
+  <style type="text/css" media="screen, projection">
+  {{ styles }}
+  </style>
+  <script>{{{ highlight_js }}}</script>
+</head>
+<body>
+<div id="container">
+  <div id="background"></div>
+  <table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <th class="docs">
+        {{#readme?}}
+        {{{ readme }}}
+        {{/readme?}}
+      </th>
+      <th class="code">
+        <h1>{{ title }}</h1>
+        <ul class="toc">
+          {{#dirs}}
+          <li>
+            {{ dir }}
+            <ul>
+              {{#files}}
+              <li><a href="{{ url }}">{{ basename }}</a></li>
+              {{/files}}
+            </ul>
+          </li>
+          {{/dirs}}
+        </ul>
+      </th>
+    </tr>
+  </tbody>
+  </table>
+</div>
+</body>
+</html>
