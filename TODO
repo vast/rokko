@@ -1,6 +1,6 @@
 [ ] documentation
 [ ] option for offline/online ready documentation
-[ ] rake tasks
+[x] rake task
 [ ] tests
 [ ] explain key differences
 [ ] README and LICENSE
