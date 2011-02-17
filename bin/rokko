@@ -26,7 +26,7 @@ end
 def usage(stream=$stderr, status=1)
   stream.puts File.readlines(__FILE__).
     grep(/^#\//).
-    map { |line| line.sub(/^#. ?/, '') }.
+    map {|line| line.sub(/^#. ?/, '')}.
     join
   exit status
 end
@@ -44,9 +44,9 @@ sources = []
 options = {}
 ARGV.options { |o|
   o.program_name = File.basename($0)
-  o.on("-o", "--output=DIR") { |dir| output_dir = dir }
-  o.on("-i", "--index [FILE]") { |index| index ? options[:index] = index : options[:generate_index] = true}
-  o.on_tail("-h", "--help") { usage($stdout, 0) }
+  o.on("-o", "--output=DIR") {|dir| output_dir = dir}
+  o.on("-i", "--index [FILE]") {|index| index ? options[:index] = index : options[:generate_index] = true}
+  o.on_tail("-h", "--help") {usage($stdout, 0)}
   o.parse!
 } or abort_with_note
 
@@ -70,7 +70,7 @@ sources.each do |filename|
   dest = File.join(output_dir, filename.sub(Regexp.new("#{File.extname(filename)}$"), ".html"))
   puts "rokko: #{filename} -> #{dest}"
   FileUtils.mkdir_p File.dirname(dest)
-  File.open(dest, 'wb') { |fd| fd.write(rokko.to_html) }
+  File.open(dest, 'wb') {|fd| fd.write(rokko.to_html)}
 end
 
 # Generate index.html if needed.
@@ -78,17 +78,13 @@ if options[:generate_index]
   require 'rokko/index_layout'
   dest = File.join(output_dir, 'index.html')
   puts "rokko: #{dest}"
-  File.open(dest, 'wb') { |fd| fd.write(Rokko::IndexLayout.new(sources, readme).render)}
+  File.open(dest, 'wb') {|fd| fd.write(Rokko::IndexLayout.new(sources, readme).render)}
 end
 
 # Generate and use specified file as index.
-if options[:index]
-
-  source_index = sources.delete(options[:index])
-  if source_index
-    rokko = Rokko::Rokko.new(source_index, sources, options)
-    dest = File.join(output_dir, 'index.html')
-    puts "rokko: #{source_index} -> index.html"
-    File.open(dest, 'wb') { |fd| fd.write(rokko.to_html) }
-  end
+if options[:index] && source_index = sources.delete(options[:index])
+  rokko = Rokko::Rokko.new(source_index, sources, options.merge(:preserve_urls => true))
+  dest = File.join(output_dir, 'index.html')
+  puts "rokko: #{source_index} -> index.html"
+  File.open(dest, 'wb') {|fd| fd.write(rokko.to_html)}
 end

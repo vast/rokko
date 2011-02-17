@@ -120,5 +120,6 @@ module Rokko
       
       ::Rokko::Layout.new(self).render
     end
+
   end
 end

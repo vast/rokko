@@ -51,8 +51,13 @@ module Rokko
     
     private
     def relative_url(source)
+      if(@doc.options[:preserve_urls])
+        source.sub(Regexp.new("#{File.extname(source)}$"), ".html")
+      else
         relative_path = Pathname.new(File.dirname(source)).relative_path_from(Pathname(File.dirname(@doc.file))).to_s
-      "#{relative_path}/#{File.basename(source).sub(Regexp.new("#{File.extname(source)}$"), ".html")}"
-    end 
+        "#{relative_path}/#{File.basename(source).sub(Regexp.new("#{File.extname(source)}$"), ".html")}"
+      end
+    end
+
   end
 end

@@ -35,4 +35,5 @@ class Rokko::IndexLayout < Rokko::Layout
       c
     end.sort.collect {|k, v| {:dir => k, :files => v}}
   end
+
 end
