@@ -6,6 +6,7 @@ module Rokko
     attr_reader :file
     attr_reader :sections
     attr_reader :sources
+    attr_reader :options
     
     @@comment_pattern = /^\s*#\s?/
     @@block_comment_start = /^\s*=begin\s*$/
@@ -14,6 +15,7 @@ module Rokko
     def initialize(filename, sources = [], options = {}, &block)
       @file = filename
       @sources = sources
+      @options = options
       
       @data = if block_given?
         yield

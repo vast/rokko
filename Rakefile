@@ -1,8 +1,4 @@
-require 'rubygems'
+$:.unshift(File.expand_path('lib'))
+require 'rokko/task'
 
-desc "tests"
-task :test do
-  require 'lib/rokko'
-  
-  puts Rokko::Rokko.new("lib/rokko.rb").to_html
-end
+Rokko::Task.new(:rokko, 'docs', ['lib/**/*.rb', 'README.md'], {:index => true})
