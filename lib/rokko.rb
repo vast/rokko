@@ -8,7 +8,7 @@ module Rokko
     attr_reader :sources
     attr_reader :options
     
-    @@comment_pattern = /^\s*#\s?/
+    @@comment_pattern = /^\s*#(?!\{)\s?/
     @@block_comment_start = /^\s*=begin\s*$/
     @@block_comment_end = /^\s*=end\s*$/
     
