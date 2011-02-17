@@ -4,7 +4,7 @@ require "rokko/version"
 
 Gem::Specification.new do |s|
   s.name        = "rokko"
-  s.version     = Rocko::VERSION
+  s.version     = Rokko::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Vasily Polovnyov"]
   s.email       = ["vasily@polovnyov.ru"]
