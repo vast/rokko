@@ -38,7 +38,7 @@ module Rokko
           require 'rokko/index_layout'
           out_dest = File.join(@dest, 'index.html')
           puts "rokko: #{out_dest}"
-          File.open(out_dest, 'wb') {|fd| fd.write(IndexLayout.new(@sources, readme).render)}
+          File.open(out_dest, 'wb') {|fd| fd.write(IndexLayout.new(@sources, readme, @options).render)}
         end
 
         # Run specified file through rokko and use it as index

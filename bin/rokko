@@ -6,6 +6,7 @@
 #/ Options:
 #/   -i, --index=<file>     Also generate an index with links to HTML files or use <file> as
 #/                          index
+#/   -l, --local            Generate offline-ready documentation
 #/   -o, --output=<dir>     Directory where generated HTML files are written
 #/       --help             Show this help message
 
@@ -46,6 +47,7 @@ ARGV.options { |o|
   o.program_name = File.basename($0)
   o.on("-o", "--output=DIR") {|dir| output_dir = dir}
   o.on("-i", "--index [FILE]") {|index| index ? options[:index] = index : options[:generate_index] = true}
+  o.on("-l", "--local") {options[:local] = true}
   o.on_tail("-h", "--help") {usage($stdout, 0)}
   o.parse!
 } or abort_with_note
@@ -78,7 +80,7 @@ if options[:generate_index]
   require 'rokko/index_layout'
   dest = File.join(output_dir, 'index.html')
   puts "rokko: #{dest}"
-  File.open(dest, 'wb') {|fd| fd.write(Rokko::IndexLayout.new(sources, readme).render)}
+  File.open(dest, 'wb') {|fd| fd.write(Rokko::IndexLayout.new(sources, readme, options).render)}
 end
 
 # Generate and use specified file as index.

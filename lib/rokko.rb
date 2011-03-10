@@ -1,5 +1,6 @@
 # ##Rokko -- fat-free [Rocco](http://rtomayko.github.com/rocco/)
 require 'rdiscount'
+require 'rokko/version'
 
 module Rokko
   class Rokko

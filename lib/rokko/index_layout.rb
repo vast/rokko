@@ -1,9 +1,10 @@
 class Rokko::IndexLayout < Rokko::Layout
   self.template_path = File.dirname(__FILE__)
 
-  def initialize(sources, readme = '')
+  def initialize(sources, readme = '', options = {})
     @sources = sources
     @readme = readme
+    @options = options
   end
 
   def title

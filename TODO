@@ -1,5 +1,5 @@
 [ ] documentation
-[ ] option for offline/online ready documentation
+[x] option for offline/online ready documentation
 [x] rake task
 [ ] tests
 [ ] explain key differences
