@@ -2,5 +2,5 @@
 [x] option for offline/online ready documentation
 [x] rake task
 [ ] tests
-[ ] explain key differences
-[ ] README and LICENSE
+[x] explain key differences
+[x] README and LICENSE
