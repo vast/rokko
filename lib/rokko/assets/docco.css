@@ -5,7 +5,6 @@ body {
   line-height: 22px;
   color: #252519;
   margin: 0; padding: 0;
-  text-align: left;
 }
 a {
   color: #261a3b;
@@ -85,7 +84,7 @@ table td {
       margin: 15px 0 15px;
       padding-left: 15px;
     }
-    .docs p tt, .docs code {
+    .docs p tt, .docs p code {
       background: #f8f8ff;
       border: 1px solid #dedede;
       font-size: 12px;
@@ -116,6 +115,6 @@ table td {
   }
     pre, tt, code {
       font-size: 12px; line-height: 18px;
-      font-family: Monaco, Consolas, "Lucida Console", monospace;
+      font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
       margin: 0; padding: 0;
     }
