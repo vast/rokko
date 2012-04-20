@@ -285,7 +285,25 @@ pre .tex .formula {
         <div class="pilwrap">
           <a class="pilcrow" href="#section-1">&#182;</a>
         </div>
-        
+        <p>Usage:</p>
+
+<pre><code>Rokko::Task.new(:task_name, output_dir, filelist, opts)
+</code></pre>
+
+<p>Example:</p>
+
+<pre><code>Rokko::Task.new(:rokko, 'docs',
+                ['lib/**/*.rb', 'README.md'],
+                {:index =&gt; true, :local =&gt; true})
+</code></pre>
+
+<p>Available options:</p>
+
+<ul>
+<li><code>:local</code> &mdash; generate offline-ready documentation.</li>
+<li><code>:index</code> &mdash; if value is a file name, then it will be used as an index. If value is <code>true</code> then
+an index file with table of contents will be generated.</li>
+</ul>
       </td>
       <td class="code">
         <pre class="ruby"><code>require 'rokko'

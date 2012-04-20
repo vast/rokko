@@ -290,6 +290,7 @@ pre .tex .formula {
       </td>
       <td class="code">
         <pre class="ruby"><code>require 'pathname'
+
 module Rokko
   class Layout &lt; Mustache
     self.template_path = File.dirname(__FILE__)
@@ -310,8 +311,8 @@ module Rokko
 
         &quot;&lt;style type=\&quot;text/css\&quot; media=\&quot;screen, projection\&quot;&gt;#{docco}\n#{highlight}&lt;/style&gt;&quot;
       else
-        &quot;&lt;link rel=\&quot;stylesheet\&quot; href=\&quot;http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/docco.css\&quot; /&gt;
-         &lt;link rel=\&quot;stylesheet\&quot; href=\&quot;http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/highlight.css\&quot; /&gt;&quot;
+        &quot;&lt;link rel=\&quot;stylesheet\&quot; href=\&quot;http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css\&quot; /&gt;
+         &lt;link rel=\&quot;stylesheet\&quot; href=\&quot;http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.css\&quot; /&gt;&quot;
       end
     end
     
@@ -319,7 +320,7 @@ module Rokko
       js = if @options[:local]
         &quot;&lt;script&gt;#{File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.pack.js'))}&lt;/script&gt;&quot;
       else
-        &quot;&lt;script src=\&quot;http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/highlight.pack.js\&quot;&gt;&lt;/script&gt;&quot;
+        &quot;&lt;script src=\&quot;http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.pack.js\&quot;&gt;&lt;/script&gt;&quot;
       end
       
       js + &quot;\n&quot; + &quot;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;\n&quot;
