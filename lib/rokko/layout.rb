@@ -1,4 +1,5 @@
 require 'pathname'
+
 module Rokko
   class Layout < Mustache
     self.template_path = File.dirname(__FILE__)

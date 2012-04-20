@@ -1,3 +1,17 @@
+# Usage:
+#
+#     Rokko::Task.new(:task_name, output_dir, filelist, opts)
+#
+# Example:
+#     Rokko::Task.new(:rokko, 'docs',
+#                     ['lib/**/*.rb', 'README.md'],
+#                     {:index => true, :local => true})
+#
+# Available options:
+#
+# * `:local` -- generate offline-ready documentation.
+# * `:index` -- if value is a file name, then it will be used as an index. If value is `true` then
+#   an index file with table of contents will be generated.
 require 'rokko'
 
 module Rokko

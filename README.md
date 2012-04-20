@@ -21,6 +21,10 @@ Install with Rubygems:
 
     sudo gem install rokko
 
+or Bundler:
+
+    gem 'rokko'
+
 ##Usage
 
 `rokko` command can be used to generate documentation for a set of Ruby source files:
