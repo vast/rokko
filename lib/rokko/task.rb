@@ -2,6 +2,7 @@ require 'rokko'
 
 module Rokko
   class Task
+    include Rake::DSL if defined?(Rake::DSL)
 
     def initialize(task_name='rokko', dest='docs/', sources='lib/**/*.rb', options={})
       @name = task_name
