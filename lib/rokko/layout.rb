@@ -19,8 +19,8 @@ module Rokko
 
         "<style type=\"text/css\" media=\"screen, projection\">#{docco}\n#{highlight}</style>"
       else
-        "<link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/docco.css\" />
-         <link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/highlight.css\" />"
+        "<link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css\" />
+         <link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.css\" />"
       end
     end
     
@@ -28,7 +28,7 @@ module Rokko
       js = if @options[:local]
         "<script>#{File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.pack.js'))}</script>"
       else
-        "<script src=\"http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/highlight.pack.js\"></script>"
+        "<script src=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.pack.js\"></script>"
       end
       
       js + "\n" + "<script>hljs.initHighlightingOnLoad();</script>\n"
