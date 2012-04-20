@@ -19,8 +19,8 @@ module Rokko
 
         "<style type=\"text/css\" media=\"screen, projection\">#{docco}\n#{highlight}</style>"
       else
-        "<link rel=\"stylesheet\" href=\"http://github.com/vast/rokko/raw/v#{::Rokko::VERSION}/lib/rokko/assets/docco.css\" />
-         <link rel=\"stylesheet\" href=\"http://github.com/vast/rokko/raw/v#{::Rokko::VERSION}/lib/rokko/assets/highlight.css\" />"
+        "<link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/docco.css\" />
+         <link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/highlight.css\" />"
       end
     end
     
@@ -28,7 +28,7 @@ module Rokko
       js = if @options[:local]
         "<script>#{File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.pack.js'))}</script>"
       else
-        "<script src=\"http://github.com/vast/rokko/raw/v#{::Rokko::VERSION}/lib/rokko/assets/highlight.pack.js\"></script>"
+        "<script src=\"http://vast.github.com/rokko/v#{::Rokko::VERSION}/assets/highlight.pack.js\"></script>"
       end
       
       js + "\n" + "<script>hljs.initHighlightingOnLoad();</script>\n"
@@ -50,12 +50,16 @@ module Rokko
     end
     
     def sources
-      @doc.sources.sort.map do |source|
+      sources = @doc.sources.sort.map do |source|
         {
           :path => source,
           :basename => File.basename(source),
           :url => relative_url(source)
         }
+      end
+
+      if @doc.options[:index] || @doc.options[:generate_index]
+        sources.unshift({:path => 'index.html', :basename => 'index', :url => relative_url('index.html')})
       end
     end
     
