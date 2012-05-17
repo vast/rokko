@@ -118,7 +118,6 @@ module Rokko
     
     def to_html
       require 'mustache'
-      $:.unshift(File.dirname(__FILE__))
       require 'rokko/layout'
       
       ::Rokko::Layout.new(self).render

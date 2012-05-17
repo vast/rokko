@@ -1,5 +1,5 @@
 class Rokko::IndexLayout < Rokko::Layout
-  self.template_path = File.dirname(__FILE__)
+  self.template_file = File.join(File.dirname(__FILE__), 'index_layout.mustache')
 
   def initialize(sources, readme = '', options = {})
     @sources = sources

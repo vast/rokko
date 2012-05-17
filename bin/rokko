@@ -12,16 +12,7 @@
 
 require 'optparse'
 require 'fileutils'
-begin
-  $:.unshift(File.expand_path('../../lib', __FILE__).sub(/^#{Dir.pwd}\//, ''))
-  require 'rokko'
-rescue LoadError
-  if !defined?(Gem)
-    require 'rubygems'
-    retry
-  end
-  raise
-end
+require 'rokko'
 
 # Write usage message to stdout and exit
 def usage(stream=$stderr, status=1)

@@ -2,7 +2,7 @@ require 'pathname'
 
 module Rokko
   class Layout < Mustache
-    self.template_path = File.dirname(__FILE__)
+    self.template_file = File.join(File.dirname(__FILE__), 'layout.mustache')
     
     def initialize(doc)
       @doc = doc
