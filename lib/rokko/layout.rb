@@ -62,6 +62,8 @@ module Rokko
       if @doc.options[:index] || @doc.options[:generate_index]
         sources.unshift({:path => 'index.html', :basename => 'index', :url => relative_url('index.html')})
       end
+
+      sources
     end
     
     private

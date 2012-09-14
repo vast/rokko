@@ -15,7 +15,7 @@ class RokkoParsingTest < Test::Unit::TestCase
   end
 
   def test_normalizing
-    r = Rokko::Rokko.new('test.rb', ['test.rb'], {}) {""}
+    r = Rokko::Rokko.new('test.rb', ['test.rb']) {""}
     sections = r.parse(fixture('normalizing'))
     assert_equal "save it", sections[1][0][0]
   end
