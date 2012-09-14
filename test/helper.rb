@@ -4,3 +4,7 @@ def rokkoize(contents, options = {})
     contents
   end
 end
+
+def fixture(filename)
+  File.read(File.expand_path("../fixtures/#{filename}.rb", __FILE__))
+end

@@ -1,5 +1,5 @@
 class RokkoBasicTests < Test::Unit::TestCase
-  ROKKO_FIXTURE = File.read(File.expand_path('../fixtures/filename.rb', __FILE__))
+  ROKKO_FIXTURE = fixture('filename')
 
   def test_rokko_exists_and_is_instancable
     assert_nothing_raised do
