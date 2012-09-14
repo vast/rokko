@@ -1,6 +1,6 @@
 # ##Rokko -- fat-free [Rocco](http://rtomayko.github.com/rocco/)
 require 'rdiscount'
-require 'rokko/version'
+require File.expand_path('../rokko/version', __FILE__)
 
 module Rokko
   class Rokko
@@ -118,7 +118,7 @@ module Rokko
     
     def to_html
       require 'mustache'
-      require 'rokko/layout'
+      require File.expand_path('../rokko/layout', __FILE__)
       
       ::Rokko::Layout.new(self).render
     end
