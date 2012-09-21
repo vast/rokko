@@ -7,7 +7,7 @@ the quick-and-dirty, hundred-line-long, literate-programming-style documentation
 Rokko reads Ruby source files and produces annotated source documentation in HTML format.
 Comments are formatted with Markdown and presented alongside syntax highlighted code so as to give an annotation effect.
 
-##Why Rokko?
+## Why Rokko?
 
 * Rokko supports only Ruby source files (consider using [Rocco](http://rtomayko.github.com/rocco/)
   if you need more languages).
@@ -15,7 +15,7 @@ Comments are formatted with Markdown and presented alongside syntax highlighted 
 * Rokko can generate offline-ready documentation (all assets are bundled).
 * Rokko can generate an index file with links to everything (like Table of Contents).
 
-##Installation
+## Installation
 
 Install with Rubygems:
 
@@ -25,7 +25,7 @@ or Bundler:
 
     gem 'rokko'
 
-##Usage
+## Usage
 
 `rokko` command can be used to generate documentation for a set of Ruby source files:
 
@@ -41,13 +41,14 @@ And run:
 
     rake rokko
 
-##Options and configuration
+## Options and configuration
 
-* `-i`, `--index=<file>` -- generate an index with links to HTML files or use `<file>` as index.
 * `-l`, `--local` -- generate offline-ready documentation.
+* `-i`, `--index=<file>` -- generate an index with links to HTML files or use `<file>` as index.
 * `-o`, `--output=<dir>` -- directory where generated HTML files are written.
+* `-s`, `--stylesheet=<url>` -- CSS stylesheet to use instead of default one.
 
-###Rake task
+### Rake task
 
 Usage:
 
@@ -58,4 +59,5 @@ Available options:
 * `:local` -- generate offline-ready documentation.
 * `:index` -- if value is a file name, then it will be used as an index. If value is `true` then
   an index file with table of contents will be generated.
+* `:stylesheet` -- CSS stylesheet to use instead of default one.
 
