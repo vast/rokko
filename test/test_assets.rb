@@ -26,6 +26,12 @@ class TestRokkoAssets < Test::Unit::TestCase
     assert contents.include?(asset_contents('highlight.pack.js'))
   end
 
+  def test_custom_stylesheet
+    contents = rokkoize(ROKKO_FIXTURE, :stylesheet => 'http://ya.ru/base.css').to_html
+
+    assert contents.include?('<link rel="stylesheet" href="http://ya.ru/base.css" />')
+  end
+
   private
   def asset_contents(filename)
     File.read(File.expand_path("../../lib/rokko/assets/#{filename}",__FILE__))

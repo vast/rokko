@@ -12,6 +12,7 @@
 # * `:local` -- generate offline-ready documentation.
 # * `:index` -- if value is a file name, then it will be used as an index. If value is `true` then
 #   an index file with table of contents will be generated.
+# * `:stylesheet` -- CSS stylesheet to use instead of default one.
 require 'rokko'
 
 module Rokko

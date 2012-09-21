@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-#/ Usage: rokko [-i [INDEX_FILE]][-o <dir>] <file>...
+#/ Usage: rokko [-i [INDEX_FILE]] [-o <dir>] [-s <stylesheet>] <file>...
 #/ Generate literate-programming-style documentation for Ruby source <file>s.
 #/
 #/ Options:
@@ -8,6 +8,7 @@
 #/                          index
 #/   -l, --local            Generate offline-ready documentation
 #/   -o, --output=<dir>     Directory where generated HTML files are written
+#/   -s, --stylesheet=<url> CSS stylesheet to use instead of default one
 #/       --help             Show this help message
 
 require 'optparse'
@@ -37,6 +38,7 @@ options = {}
 ARGV.options { |o|
   o.program_name = File.basename($0)
   o.on("-o", "--output=DIR") {|dir| output_dir = dir}
+  o.on("-s", "--stylesheet=STYLESHEET") {|stylesheet| options[:stylesheet] = stylesheet}
   o.on("-i", "--index [FILE]") {|index| index ? options[:index] = index : options[:generate_index] = true}
   o.on("-l", "--local") {options[:local] = true}
   o.on_tail("-h", "--help") {usage($stdout, 0)}

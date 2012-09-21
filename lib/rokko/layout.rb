@@ -20,7 +20,8 @@ module Rokko
 
         "<style type=\"text/css\" media=\"screen, projection\">#{docco}\n#{highlight}</style>"
       else
-        "<link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css\" />
+        stylesheet_link = @options[:stylesheet] || "http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css"
+        "<link rel=\"stylesheet\" href=\"#{stylesheet_link}\" />
          <link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.css\" />"
       end
     end

@@ -3,3 +3,4 @@ pkg/*
 .bundle
 .rbenv-version
 Gemfile.lock
+.DS_Store
