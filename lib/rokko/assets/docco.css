@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 #background {
   position: fixed;
   top: 0; left: 525px; right: 0; bottom: 0;
-  background: #f5f5ff;
+  background: #f8f8ff;
   border-left: 1px solid #e5e5ee;
   z-index: -1;
 }
@@ -110,7 +110,7 @@ table td {
     padding: 14px 15px 16px 25px;
     width: 100%;
     vertical-align: top;
-    background: #f5f5ff;
+    background: #f8f8ff;
     border-left: 1px solid #e5e5ee;
   }
     pre, tt, code {
