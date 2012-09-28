@@ -35,7 +35,9 @@ It is also possible to use Rokko as a Rake task:
 
     require 'rokko/task'
 
-    Rokko::Task.new(:rokko, 'docs', ['lib/**/*.rb', 'README.md'], {:index => true, :local => true})
+    Rokko::Task.new(:rokko, 'docs', # task name, output directory
+                    ['lib/**/*.rb', 'README.md'],
+                    {:index => true, :local => true})
 
 And run:
 
@@ -44,7 +46,8 @@ And run:
 ## Options and configuration
 
 * `-l`, `--local` -- generate offline-ready documentation.
-* `-i`, `--index=<file>` -- generate an index with links to HTML files or use `<file>` as index.
+* `-i`, `--index` -- generate index.html with links (TOC) to all generated HTML files.
+* `-i <file>`, `--index=<file>` -- use `<file>` as index.html.
 * `-o`, `--output=<dir>` -- directory where generated HTML files are written.
 * `-s`, `--stylesheet=<url>` -- CSS stylesheet to use instead of default one.
 
@@ -57,7 +60,7 @@ Usage:
 Available options:
 
 * `:local` -- generate offline-ready documentation.
-* `:index` -- if value is a file name, then it will be used as an index. If value is `true` then
-  an index file with table of contents will be generated.
+* `:index => true` -- generate index.html with links (TOC) to all generated HTML files.
+* `:index => <file>` -- use `<file>` as index.html.
 * `:stylesheet` -- CSS stylesheet to use instead of default one.
 

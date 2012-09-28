@@ -77,7 +77,7 @@ if options[:generate_index]
 end
 
 # Generate and use specified file as index.
-if options[:index] && source_index = sources.delete(options[:index])
+if options[:index] && source_index = sources.find{|s| s == options[:index]}
   rokko = Rokko::Rokko.new(source_index, sources, options.merge(:preserve_urls => true))
   dest = File.join(output_dir, 'index.html')
   puts "rokko: #{source_index} -> index.html"

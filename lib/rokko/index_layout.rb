@@ -1,3 +1,5 @@
+# Layout containing README file and "Table of Contents" with links
+# to all generated HTML files
 class Rokko::IndexLayout < Rokko::Layout
   self.template_file = File.join(File.dirname(__FILE__), 'index_layout.mustache')
 

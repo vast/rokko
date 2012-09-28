@@ -1,14 +1,40 @@
-# ##Rokko -- fat-free [Rocco](http://rtomayko.github.com/rocco/)
+# ## Rokko -- fat-free [Rocco](http://rtomayko.github.com/rocco/)
+# Rokko is an else one Ruby port of [Docco](http://jashkenas.github.com/docco/),
+# the quick-and-dirty, hundred-line-long, literate-programming-style documentation generator.
+# 
+# Rokko reads Ruby source files and produces annotated source documentation in HTML format.
+# Comments are formatted with Markdown and presented alongside syntax highlighted code so as
+# to give an annotation effect.
+# 
+# ### Why Rokko?
+# 
+# * Rokko supports only Ruby source files (consider using [Rocco](http://rtomayko.github.com/rocco/)
+#   if you need more languages).
+# * Rokko uses awesome [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) library
+#   for syntax highlighting.
+# * Rokko can generate offline-ready documentation (all assets are bundled).
+# * Rokko can generate an index file with links to everything (like Table of Contents).
+
+# We'll definitely need RDiscount (Markdown library)
+# and Mustache (templating engine)
 require 'rdiscount'
+require 'mustache'
 require File.expand_path('../rokko/version', __FILE__)
 
+# ### Public interface
+# `Rokko.new` takes a filename, an optional list of source filenames
+# for other documentation sources, an options hash, and an optional block.
+# 
+# When `block` is given, it must return a string with file contents.
+# With no `block`, the file is read to retrieve data.
 module Rokko
   class Rokko
     attr_reader :file
     attr_reader :sections
     attr_reader :sources
     attr_reader :options
-    
+
+    # Comment patterns
     @@comment_pattern = /^\s*#(?!\{)\s?/
     @@block_comment_start = /^\s*=begin\s*$/
     @@block_comment_end = /^\s*=end\s*$/
@@ -26,7 +52,10 @@ module Rokko
       
       @sections = prettify(split(parse(@data)))
     end
-    
+
+    # Parse the raw file data into a list of two-tuples. Each tuple has the form
+    # `[docs, code]` where both elements are arrays containing the raw lines
+    # parsed from the input file, comment characters stripped.
     def parse(data)
       sections = []
       docs, code = [], []
@@ -117,7 +146,6 @@ module Rokko
     
     
     def to_html
-      require 'mustache'
       require File.expand_path('../rokko/layout', __FILE__)
       
       ::Rokko::Layout.new(self).render

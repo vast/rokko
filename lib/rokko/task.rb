@@ -1,18 +1,25 @@
+# ### Rokko Rake task
+# 
 # Usage:
 #
-#     Rokko::Task.new(:task_name, output_dir, filelist, opts)
-#
-# Example:
-#     Rokko::Task.new(:rokko, 'docs',
+#     require 'rokko/task'
+# 
+#     Rokko::Task.new(:rokko, 'docs', # task name, output dir
 #                     ['lib/**/*.rb', 'README.md'],
 #                     {:index => true, :local => true})
 #
+# And run with:
+#     rake rokko
+# 
 # Available options:
 #
 # * `:local` -- generate offline-ready documentation.
-# * `:index` -- if value is a file name, then it will be used as an index. If value is `true` then
-#   an index file with table of contents will be generated.
+# * `:index => true` -- generate index.html with links (TOC) to all generated HTML files.
+# * `:index => <file>` -- use `<file>` as index.html.
 # * `:stylesheet` -- CSS stylesheet to use instead of default one.
+
+# `Rokko::Task.new` takes a task name, the destination directory,
+# a source file pattern or file list
 require 'rokko'
 
 module Rokko
@@ -31,6 +38,7 @@ module Rokko
       define
     end
 
+    # Actually setup the task
     def define
       desc "Generate rokko documentation"
       task @name do
@@ -58,7 +66,7 @@ module Rokko
         end
 
         # Run specified file through rokko and use it as index
-        if @options[:index] && source_index = @sources.delete(@options[:index])
+        if @options[:index] && source_index = @sources.find{|s| s == @options[:index]}
           rokko = Rokko.new(source_index, @sources, @options.merge(:preserve_urls => true))
           out_dest = File.join(@dest, 'index.html')
           puts "rokko: #{source_index} -> index.html"
