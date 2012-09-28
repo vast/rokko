@@ -1,4 +1,4 @@
-Rokko -- fat-free [Rocco](http://rtomayko.github.com/rocco/)
+Rokko — fat-free [Rocco](http://rtomayko.github.com/rocco/)
 =============================================================
 
 Rokko is an else one Ruby port of [Docco](http://jashkenas.github.com/docco/),
@@ -23,7 +23,9 @@ Install with Rubygems:
 
 or Bundler:
 
-    gem 'rokko'
+```ruby
+gem 'rokko'
+```
 
 ## Usage
 
@@ -33,11 +35,13 @@ or Bundler:
 
 It is also possible to use Rokko as a Rake task:
 
-    require 'rokko/task'
+```ruby
+require 'rokko/task'
 
-    Rokko::Task.new(:rokko, 'docs', # task name, output directory
-                    ['lib/**/*.rb', 'README.md'],
-                    {:index => true, :local => true})
+Rokko::Task.new(:rokko, 'docs', # task name, output directory
+                ['lib/**/*.rb', 'README.md'],
+                {:index => true, :local => true})
+```
 
 And run:
 
@@ -45,22 +49,24 @@ And run:
 
 ## Options and configuration
 
-* `-l`, `--local` -- generate offline-ready documentation.
-* `-i`, `--index` -- generate index.html with links (TOC) to all generated HTML files.
-* `-i <file>`, `--index=<file>` -- use `<file>` as index.html.
-* `-o`, `--output=<dir>` -- directory where generated HTML files are written.
-* `-s`, `--stylesheet=<url>` -- CSS stylesheet to use instead of default one.
+* `-l`, `--local` — generate offline-ready documentation.
+* `-i`, `--index` — generate index.html with links (TOC) to all generated HTML files.
+* `-i <file>`, `--index=<file>` — use `<file>` as index.html.
+* `-o`, `--output=<dir>` — directory where generated HTML files are written.
+* `-s`, `--stylesheet=<url>` — CSS stylesheet to use instead of default one.
 
 ### Rake task
 
 Usage:
 
-    Rokko::Task.new(:task_name, output_dir, filelist, opts)
+```ruby
+Rokko::Task.new(:task_name, output_dir, filelist, opts)
+```
 
 Available options:
 
-* `:local` -- generate offline-ready documentation.
-* `:index => true` -- generate index.html with links (TOC) to all generated HTML files.
-* `:index => <file>` -- use `<file>` as index.html.
-* `:stylesheet` -- CSS stylesheet to use instead of default one.
+* `:local` — generate offline-ready documentation.
+* `:index => true` — generate index.html with links (TOC) to all generated HTML files.
+* `:index => <file>` — use `<file>` as index.html.
+* `:stylesheet` — CSS stylesheet to use instead of default one.
 
