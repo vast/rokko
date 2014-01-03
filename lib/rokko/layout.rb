@@ -16,21 +16,21 @@ module Rokko
     def styles
       if @options[:local]
         docco = File.read(File.join(File.dirname(__FILE__), 'assets', 'docco.css'))
-        highlight = File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.css'))
+        highlight = File.read(File.join(File.dirname(__FILE__), 'assets', 'github.min.css'))
 
         %(<style type="text/css" media="screen, projection">#{docco}\n#{highlight}</style>)
       else
         stylesheet_link = @options[:stylesheet] || "http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css"
         %(<link rel="stylesheet" href="#{stylesheet_link}" />
-         <link rel="stylesheet" href="http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.css" />)
+         <link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/github.min.css" />)
       end
     end
 
     def highlight_js
       js = if @options[:local]
-        "<script>#{File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.pack.js'))}</script>"
+        "<script>#{File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.min.js'))}</script>"
       else
-        %(<script src="http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.pack.js"></script>)
+        %(<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>)
       end
 
       [js, '<script>hljs.initHighlightingOnLoad();</script>'].join("\n")
