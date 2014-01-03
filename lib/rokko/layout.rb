@@ -20,7 +20,7 @@ module Rokko
 
         %(<style type="text/css" media="screen, projection">#{docco}\n#{highlight}</style>)
       else
-        stylesheet_link = @options[:stylesheet] || "http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css"
+        stylesheet_link = @options[:stylesheet] || "http://vast.github.io/rokko/assets/v#{::Rokko::VERSION}/docco.css"
         %(<link rel="stylesheet" href="#{stylesheet_link}" />
          <link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/github.min.css" />)
       end
