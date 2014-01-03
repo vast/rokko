@@ -14,7 +14,7 @@ class Rokko::IndexLayout < Rokko::Layout
   end
 
   def readme
-    Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true).render(@readme)
+    Rokko::Rokko.renderer.render(@readme)
   end
 
   def readme?

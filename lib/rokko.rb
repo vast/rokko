@@ -53,6 +53,11 @@ module Rokko
       @sections = prettify(split(parse(@data)))
     end
 
+    # Markdown renderer shared between `Rokko` and `IndexLayout` classes.
+    def self.renderer
+      Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
+    end
+
     # Parse the raw file data into a list of two-tuples. Each tuple has the form
     # `[docs, code]` where both elements are arrays containing the raw lines
     # parsed from the input file, comment characters stripped.
@@ -139,8 +144,7 @@ module Rokko
       # dividers and run through the Markdown processor. Then split it back out
       # into separate sections
       markdown = docs_blocks.join("\n\n##### DIVIDER\n\n")
-      renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
-      docs_html = renderer.render(markdown).split(/\n*<h5>DIVIDER<\/h5>\n*/m)
+      docs_html = self.class.renderer.render(markdown).split(/\n*<h5>DIVIDER<\/h5>\n*/m)
 
       docs_html.zip(code_blocks)
     end
