@@ -31,7 +31,9 @@ gem 'rokko'
 
 `rokko` command can be used to generate documentation for a set of Ruby source files:
 
-    rokko -o docs lib/*.rb
+```bash
+rokko -o docs lib/*.rb
+```
 
 It is also possible to use Rokko as a Rake task:
 
@@ -45,7 +47,9 @@ Rokko::Task.new(:rokko, 'docs', # task name, output directory
 
 And run:
 
-    rake rokko
+```bash
+rake rokko
+```
 
 ## Options and configuration
 
