@@ -153,8 +153,9 @@ module Rokko
       # Combine all docs blocks into a single big markdown document with section
       # dividers and run through the Markdown processor. Then split it back out
       # into separate sections
-      markdown = docs_blocks.join("\n\n##### DIVIDER\n\n")
-      docs_html = self.class.renderer.render(markdown).split(/\n*<h5>DIVIDER<\/h5>\n*/m)
+      rendered_html = self.class.renderer.render(docs_blocks.join("\n\n##### DIVIDER\n\n"))
+      rendered_html = ' ' if rendered_html == '' # ''.split() won't return anything useful
+      docs_html = rendered_html.split(/\n*<h5>DIVIDER<\/h5>\n*/m)
 
       docs_html.zip(code_blocks)
     end
