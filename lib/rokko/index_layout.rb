@@ -14,7 +14,7 @@ class Rokko::IndexLayout < Rokko::Layout
   end
 
   def readme
-    Markdown.new(@readme, :smart).to_html
+    Rokko::Rokko.renderer.render(@readme)
   end
 
   def readme?
@@ -24,19 +24,19 @@ class Rokko::IndexLayout < Rokko::Layout
   def sources
     @sources.sort.map do |source|
       {
-        :path => source,
-        :basename => File.basename(source),
-        :url => source.sub(Regexp.new("#{File.extname(source)}$"), ".html")
+        path: source,
+        basename: File.basename(source),
+        url: source.sub(Regexp.new("#{File.extname(source)}$"), ".html")
       }
     end
   end
 
   # Groupped sources by dirname
   def dirs
-    sources.inject(Hash.new{|hsh, key| hsh[key] = []}) do |c, source|
+    sources.inject(Hash.new{ |hsh, key| hsh[key] = [] }) do |c, source|
       c[File.dirname(source[:path])].push(source)
       c
-    end.sort.collect {|k, v| {:dir => k, :files => v}}
+    end.sort.collect { |k, v| { dir: k, files: v } }
   end
 
 end

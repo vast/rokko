@@ -1,21 +1,21 @@
 # ### Rokko Rake task
-# 
+#
 # Usage:
 #
 #     require 'rokko/task'
-# 
+#
 #     Rokko::Task.new(:rokko, 'docs', # task name, output dir
 #                     ['lib/**/*.rb', 'README.md'],
-#                     {:index => true, :local => true})
+#                     index: true, local: true)
 #
 # And run with:
 #     rake rokko
-# 
+#
 # Available options:
 #
 # * `:local` -- generate offline-ready documentation.
-# * `:index => true` -- generate index.html with links (TOC) to all generated HTML files.
-# * `:index => <file>` -- use `<file>` as index.html.
+# * `index: true` -- generate index.html with links (TOC) to all generated HTML files.
+# * `index: <file>` -- use `<file>` as index.html.
 # * `:stylesheet` -- CSS stylesheet to use instead of default one.
 
 # `Rokko::Task.new` takes a task name, the destination directory,
@@ -26,7 +26,7 @@ module Rokko
   class Task
     include Rake::DSL if defined?(Rake::DSL)
 
-    def initialize(task_name='rokko', dest='docs/', sources='lib/**/*.rb', options={})
+    def initialize(task_name = 'rokko', dest = 'docs/', sources = 'lib/**/*.rb', options = {})
       @name = task_name
       @dest = dest
       @sources = FileList[sources]
@@ -44,7 +44,7 @@ module Rokko
       task @name do
         # Find README file for `index.html` and delete it from `sources`
         if @options[:generate_index]
-          readme_source = @sources.detect {|f| File.basename(f) =~ /README(\.(md|text|markdown|mdown|mkd|mkdn)$)?/i}
+          readme_source = @sources.detect { |f| File.basename(f) =~ /README(\.(md|text|markdown|mdown|mkd|mkdn)$)?/i }
           readme = readme_source ? File.read(@sources.delete(readme_source)) : ''
         end
 
@@ -62,15 +62,15 @@ module Rokko
           require 'rokko/index_layout'
           out_dest = File.join(@dest, 'index.html')
           puts "rokko: #{out_dest}"
-          File.open(out_dest, 'wb') {|fd| fd.write(IndexLayout.new(@sources, readme, @options).render)}
+          File.open(out_dest, 'wb') { |fd| fd.write(IndexLayout.new(@sources, readme, @options).render) }
         end
 
         # Run specified file through rokko and use it as index
         if @options[:index] && source_index = @sources.find{|s| s == @options[:index]}
-          rokko = Rokko.new(source_index, @sources, @options.merge(:preserve_urls => true))
+          rokko = Rokko.new(source_index, @sources, @options.merge(preserve_urls: true))
           out_dest = File.join(@dest, 'index.html')
           puts "rokko: #{source_index} -> index.html"
-          File.open(out_dest, 'wb') {|fd| fd.write(rokko.to_html)}
+          File.open(out_dest, 'wb') { |fd| fd.write(rokko.to_html) }
         end
 
       end

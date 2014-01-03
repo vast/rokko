@@ -40,7 +40,7 @@ require 'rokko/task'
 
 Rokko::Task.new(:rokko, 'docs', # task name, output directory
                 ['lib/**/*.rb', 'README.md'],
-                {:index => true, :local => true})
+                index: true, local: true)
 ```
 
 And run:
@@ -66,7 +66,7 @@ Rokko::Task.new(:task_name, output_dir, filelist, opts)
 Available options:
 
 * `:local` — generate offline-ready documentation.
-* `:index => true` — generate index.html with links (TOC) to all generated HTML files.
-* `:index => <file>` — use `<file>` as index.html.
+* `index: true` — generate index.html with links (TOC) to all generated HTML files.
+* `index: <file>` — use `<file>` as index.html.
 * `:stylesheet` — CSS stylesheet to use instead of default one.
 
