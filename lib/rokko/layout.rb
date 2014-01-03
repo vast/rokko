@@ -18,11 +18,11 @@ module Rokko
         docco = File.read(File.join(File.dirname(__FILE__), 'assets', 'docco.css'))
         highlight = File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.css'))
 
-        "<style type=\"text/css\" media=\"screen, projection\">#{docco}\n#{highlight}</style>"
+        %(<style type="text/css" media="screen, projection">#{docco}\n#{highlight}</style>)
       else
         stylesheet_link = @options[:stylesheet] || "http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css"
-        "<link rel=\"stylesheet\" href=\"#{stylesheet_link}\" />
-         <link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.css\" />"
+        %(<link rel="stylesheet" href="#{stylesheet_link}" />
+         <link rel="stylesheet" href="http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.css" />)
       end
     end
 
@@ -30,10 +30,10 @@ module Rokko
       js = if @options[:local]
         "<script>#{File.read(File.join(File.dirname(__FILE__), 'assets', 'highlight.pack.js'))}</script>"
       else
-        "<script src=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.pack.js\"></script>"
+        %(<script src="http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.pack.js"></script>)
       end
 
-      js + "\n" + "<script>hljs.initHighlightingOnLoad();</script>\n"
+      [js, '<script>hljs.initHighlightingOnLoad();</script>'].join("\n")
     end
 
     def sections
