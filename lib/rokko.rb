@@ -54,6 +54,14 @@ module Rokko
     end
 
     # Markdown renderer shared between `Rokko` and `IndexLayout` classes.
+    #
+    # `fenced_code_blocks: true` enables parsing of code blocks
+    # delimeted with 3 or more `~` or backticks:
+    #
+    #     ```ruby
+    #     puts 'ruby code'
+    #     ```
+    #
     def self.renderer
       Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
     end
