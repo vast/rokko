@@ -6,8 +6,8 @@ class TestRokkoAssets < Test::Unit::TestCase
   end
 
   def test_default_stylesheet_links
-    assert @html.include?("<link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/docco.css\" />")
-    assert @html.include?("<link rel=\"stylesheet\" href=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.css\" />")
+    assert @html.include?(%(<link rel="stylesheet" href="http://vast.github.io/rokko/assets/v#{::Rokko::VERSION}/docco.css" />))
+    assert @html.include?(%(<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/github.min.css" />))
   end
 
   def test_highlightjs_initialization
@@ -15,15 +15,15 @@ class TestRokkoAssets < Test::Unit::TestCase
   end
 
   def test_default_scripts
-    assert @html.include?("<script src=\"http://vast.github.com/rokko/assets/v#{::Rokko::VERSION}/highlight.pack.js\"></script>")
+    assert @html.include?(%(<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>))
   end
 
   def test_assets_embedding
     contents = rokkoize(ROKKO_FIXTURE, :local => true).to_html
 
     assert contents.include?(asset_contents('docco.css'))
-    assert contents.include?(asset_contents('highlight.css'))
-    assert contents.include?(asset_contents('highlight.pack.js'))
+    assert contents.include?(asset_contents('github.min.css'))
+    assert contents.include?(asset_contents('highlight.min.js'))
   end
 
   def test_custom_stylesheet
