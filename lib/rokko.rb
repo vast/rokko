@@ -122,9 +122,10 @@ module Rokko
         if section.any? && section[0].any?
           leading_space = section[0][0].match("^\s+")
           if leading_space
-            section[0] = section[0].map{|line| line.sub(/^#{leading_space.to_s}/, '')}
+            section[0] = section[0].map { |line| line.sub(/^#{leading_space.to_s}/, '') }
           end
         end
+
         section
       end
     end
@@ -141,6 +142,7 @@ module Rokko
           tabs ? line.sub(/^\t+/, '  ' * tabs.captures[0].length) : line
         end.join("\n")
       end
+
       [docs_blocks, code_blocks]
     end
 
